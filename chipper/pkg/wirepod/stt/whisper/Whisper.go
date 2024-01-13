@@ -77,18 +77,18 @@ func newAudioIntBuffer(r io.Reader) (*audio.IntBuffer, error) {
 }
 
 func makeOpenAIReq(in []byte) string {
-	url := "https://api.openai.com/v1/audio/transcriptions"
+	url := "https://localhost:4981/v1/audio/transcriptions"
 
 	buf := new(bytes.Buffer)
 	w := multipart.NewWriter(buf)
-	w.WriteField("model", "whisper-1")
+	w.WriteField("model", "gpt4all-j-v1.3-groovy")
 	sendFile, _ := w.CreateFormFile("file", "audio.mp3")
 	sendFile.Write(in)
 	w.Close()
 
 	httpReq, _ := http.NewRequest("POST", url, buf)
 	httpReq.Header.Set("Content-Type", w.FormDataContentType())
-	httpReq.Header.Set("Authorization", "Bearer "+os.Getenv("OPENAI_KEY"))
+	httpReq.Header.Set("Authorization", "Bearer "+"STUPID BITCHES!!!! lol")
 
 	client := &http.Client{}
 	resp, err := client.Do(httpReq)
